@@ -65,7 +65,9 @@ class Phpunit extends AbstractExternalTask
         $arguments = $this->processBuilder->createArgumentsForCommand('phpunit');
         $arguments->addOptionalArgument('--configuration=%s', $config['config_file']);
         $arguments->addOptionalArgument('--testsuite=%s', $config['testsuite']);
-        $arguments->addOptionalCommaSeparatedArgument('--group=%s', $config['group']);
+        foreach ($config['group'] as $group) {
+            $arguments->addOptionalArgument('--group', $group);
+        }
         $arguments->addOptionalCommaSeparatedArgument('--exclude-group=%s', $config['exclude_group']);
         $arguments->addOptionalArgument('--order-by=%s', $config['order']);
         $arguments->addOptionalArgument('--coverage-clover=%s', $config['coverage-clover']);
